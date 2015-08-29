@@ -1,6 +1,15 @@
 Linode Setup
 ===
-> Notes on how to setup [Linode](http://linode.com).
+> How to setup [Linode](http://linode.com).
+
+The following are notes on how to setup [Linode](http://linode.com). The initial setup steps have been mainly compiled from the [Linode](http://linode.com) getting started guides, which collectively provide a good starting point for basic configuration. 
+
+1. [Provision](#provision)
+1. [Remote Access](#remote-access)
+1. [Basic Ubuntu Setup](#basic-ubuntu-setup)
+1. [Basic Security Setup](#basic-ubuntu-setup)
+1. [Reverse DNS](#reverse-dns)
+1. [References](#references)
 
 ---
 ## Provision
@@ -97,6 +106,11 @@ $ apt-get upgrade --show-upgraded
 ## Basic Security Setup
 
 To setup basic security and protect the server from unauthorized access, do as follows...
+
+#### Two-Factor Authentication
+
+You are encouraged to setup two-factor authentication when logging in to the Linode manager. From the Linode manager, navigate to `My Profile --> Password & Authentication --> Two-Factor Authentication`.
+
 
 #### User
 
@@ -346,10 +360,7 @@ $ sudo chmod +x /etc/network/if-pre-up.d/firewall
 
 While DNS allows a domain name to be resolved to an IP address, reverse DNS allows an IP address to be resolved to a domain name. Reverse DNS is useful when network troubleshooting (`ping`, `traceroute`). From the Linode manager, navigate to `Linodes --> Remote Access --> Reverse DNS` and enter your domain.
 
----
-## Two-Factor Authentication
 
-You are encouraged to setup two-factor authentication when logging in to the Linode manager. From the Linode manager, navigate to `My Profile --> Password & Authentication --> Two-Factor Authentication`.
 
 
 
