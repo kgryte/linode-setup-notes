@@ -25,7 +25,7 @@ where your server IP may be found via `Linodes --> dashboard --> Remote Access`.
 
 To set up your new server, do as follows...
 
-#### Set the hostname
+#### Hostname
 
 Set the server hostname. The hostname should be unique (similar to naming a person or pet). For example,
 
@@ -41,7 +41,7 @@ $ hostname
 ```
 
 
-#### Update hosts
+#### Hosts
 
 Set the server's full-qualified domain name (FQDN) by updating the `/etc/hosts` file.
 
@@ -69,7 +69,7 @@ $ ssh myserver.<your_domain>
 For more information, see the "Adding DNS Records" section in the Linode [guide](https://www.linode.com/docs/websites/hosting-a-website/).
 
 
-#### Set the timezone
+#### Timezone
 
 Set the server timezone:
 
@@ -84,7 +84,7 @@ $ date
 ```
 
 
-#### Update the server
+#### Update
 
 Install any available updates and security patches:
 
@@ -98,7 +98,7 @@ $ apt-get upgrade --show-upgraded
 
 To setup basic security and protect the server from unauthorized access, do as follows...
 
-#### Add a new user
+#### User
 
 You are recommended to never use `root` for day-to-day tasks. A `root` user has the ability to execute any command, including commands which could break your server. For most tasks, you can use an account having normal permissions and execute `superuser` commands using `sudo`. To add a new user,
 
@@ -120,7 +120,7 @@ $ ssh <your_username>@<your_server_ip>
 ```
 
 
-#### Set up SSH
+#### SSH
 
 SSH keys allow you to authenticate using a public-private key pair and remove the need for password-based authentication.
 
@@ -212,7 +212,7 @@ $ ssh <your_username>@myserver.<your_domain> -p 567
 ```
 
 
-#### Install and Configure Fail2Ban
+#### Fail2Ban
 
 [Fail2Ban](Fail2Ban) is an application that prevents dictionary attacks on your server. [Fail2Ban](Fail2Ban) can monitor login attempts across different protocols (SSH, HTTP, SMTP) and will create temporary firewall rules to block traffic from an attacker's IP address. To install,
 
@@ -258,7 +258,7 @@ $ sudo service fail2ban restart
 Once running, Fail2Ban will block any IP address which exceeds the maximum allowed connection attempts and will log the event to `/var/log/fail2ban.log`.
 
 
-#### Create a firewall
+#### Firewall
 
 Create a firewall to limit and block unwanted inbound traffic. To see the current rules,
 
