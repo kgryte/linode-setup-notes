@@ -2,14 +2,14 @@ Linode Setup
 ===
 > Notes on how to setup [Linode](http://linode.com).
 
-#### Provision
+---
+## Provision
 
-See the getting started [guide](https://www.linode.com/docs/getting-started). After a few minutes, the [Linode](http://linode.com) will be provisioned.
-
-This guide assumes you have chosen `Ubuntu 14.04 LTS` as your base image.
+See the getting started [guide](https://www.linode.com/docs/getting-started). After a few minutes, the [Linode](http://linode.com) will be provisioned. This guide assumes you have chosen `Ubuntu 14.04 LTS` as your base image.
 
 
-#### Connecting to Your Server
+---
+## Remote Access
 
 To connect to your new [Linode](http://linode.com),
 
@@ -17,14 +17,15 @@ To connect to your new [Linode](http://linode.com),
 $ ssh root@<your_server_ip>
 ```
 
-where your server IP may be found via `linodes --> dashboard --> remote access`. You will be prompted for the `root` password you created when deploying a new image to your [Linode](http://linode.com).
+where your server IP may be found via `Linodes --> dashboard --> Remote Access`. You will be prompted for the `root` password you created when deploying a new image to your [Linode](http://linode.com).
 
 
-#### Basic Ubuntu Setup
+---
+## Basic Ubuntu Setup
 
 To set up your new server, do as follows...
 
-##### Set the hostname
+#### Set the hostname
 
 Set the server hostname. The hostname should be unique (similar to naming a person or pet). For example,
 
@@ -40,7 +41,7 @@ $ hostname
 ```
 
 
-##### Update hosts
+#### Update hosts
 
 Set the server's full-qualified domain name (FQDN) by updating the `/etc/hosts` file.
 
@@ -68,7 +69,7 @@ $ ssh myserver.<your_domain>
 For more information, see the "Adding DNS Records" section in the Linode [guide](https://www.linode.com/docs/websites/hosting-a-website/).
 
 
-##### Set the timezone
+#### Set the timezone
 
 Set the server timezone:
 
@@ -83,7 +84,7 @@ $ date
 ```
 
 
-##### Update the server
+#### Update the server
 
 Install any available updates and security patches:
 
@@ -92,12 +93,12 @@ $ apt-get update
 $ apt-get upgrade --show-upgraded
 ```
 
-
-#### Basic Security Setup
+---
+## Basic Security Setup
 
 To setup basic security and protect the server from unauthorized access, do as follows...
 
-##### Add a new user
+#### Add a new user
 
 You are recommended to never use `root` for day-to-day tasks. A `root` user has the ability to execute any command, including commands which could break your server. For most tasks, you can use an account having normal permissions and execute `superuser` commands using `sudo`. To add a new user,
 
@@ -119,14 +120,14 @@ $ ssh <your_username>@<your_server_ip>
 ```
 
 
-##### Set up SSH
+#### Set up SSH
 
 SSH keys allow you to authenticate using a public-private key pair and remove the need for password-based authentication.
 
 __WARNING__: do __not__ complete the following steps from a publicly shared computer. Run the commands from your local computer.
 
 
-###### Generate SSH keys
+##### Generate SSH keys
 
 If you have already generated SSH keys before (e.g., when configuring Github to use SSH), you can skip the following step. To generate SSH keys,
 
@@ -137,7 +138,7 @@ $ ssh-keygen -t rsa -C "<your_email_address>"
 When prompted, create a strong password. If you use a Mac, the password can be added to your keychain.
 
 
-###### Copy the public key
+##### Copy the public key
 
 Copy the public key to the server using the secure copy command `scp` from your local computer.
 
@@ -155,7 +156,7 @@ $ chmod 700 .ssh
 $ chmod 600 .ssh/authorized_keys
 ```
 
-###### Disable SSH password authentication
+##### Disable SSH password authentication
 
 If you connect to your Linode from only one computer, you should disable password authentication and require that all users authenticate using key-based authentication. If you need to connect from multiple computers, you may want to keep password authentication enabled to prevent having to copy your private key to multiple computers.
 
@@ -184,7 +185,7 @@ $ sudo service ssh restart
 After the SSH service restarts, the SSH configuration changes will be applied.
 
 
-###### Change the SSH port
+##### Change the SSH port
 
 Since all Ubuntu servers have a `root` user and most servers run SSH on port `22` (default), hackers often use automated attacks to guess the `root` password. We already prevented the `root` user from using SSH to login (see above). We can make things more difficult by changing our SSH port to a port other than `22`.
 
@@ -211,7 +212,7 @@ $ ssh <your_username>@myserver.<your_domain> -p 567
 ```
 
 
-##### Install and Configure Fail2Ban
+#### Install and Configure Fail2Ban
 
 [Fail2Ban](Fail2Ban) is an application that prevents dictionary attacks on your server. [Fail2Ban](Fail2Ban) can monitor login attempts across different protocols (SSH, HTTP, SMTP) and will create temporary firewall rules to block traffic from an attacker's IP address. To install,
 
@@ -257,7 +258,7 @@ $ sudo service fail2ban restart
 Once running, Fail2Ban will block any IP address which exceeds the maximum allowed connection attempts and will log the event to `/var/log/fail2ban.log`.
 
 
-##### Create a firewall
+#### Create a firewall
 
 Create a firewall to limit and block unwanted inbound traffic. To see the current rules,
 
@@ -340,19 +341,19 @@ Save the file and set file permissions.
 $ sudo chmod +x /etc/network/if-pre-up.d/firewall
 ```
 
-
-#### Set up reverse DNS
+---
+## Reverse DNS
 
 While DNS allows a domain name to be resolved to an IP address, reverse DNS allows an IP address to be resolved to a domain name. Reverse DNS is useful when network troubleshooting (`ping`, `traceroute`). From the Linode manager, navigate to `Linodes --> Remote Access --> Reverse DNS` and enter your domain.
 
-
-#### Set up two-factor authentication
+---
+## Two-Factor Authentication
 
 You are encouraged to setup two-factor authentication when logging in to the Linode manager. From the Linode manager, navigate to `My Profile --> Password & Authentication --> Two-Factor Authentication`.
 
 
 
-
+---
 ## References
 
 *	[Getting started](https://www.linode.com/docs/getting-started)
