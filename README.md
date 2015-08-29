@@ -14,19 +14,25 @@ The following are notes on how to setup [Linode](http://linode.com). The initial
 ---
 ## Provision
 
-See the getting started [guide](https://www.linode.com/docs/getting-started). After a few minutes, the [Linode](http://linode.com) will be provisioned. This guide assumes you have chosen `Ubuntu 14.04 LTS` as your base image.
+To provision a new [Linode](http://linode.com) server, see the getting started [guide](https://www.linode.com/docs/getting-started). After a few minutes, a [Linode](http://linode.com) server will be provisioned. This guide assumes you have chosen `Ubuntu 14.04 LTS` as your base image.
 
 
 ---
 ## Remote Access
 
-To connect to your new [Linode](http://linode.com),
+To connect to a [Linode](http://linode.com) server,
 
 ``` bash
 $ ssh root@<your_server_ip>
 ```
 
-where your server IP may be found via `Linodes --> dashboard --> Remote Access`. You will be prompted for the `root` password you created when deploying a new image to your [Linode](http://linode.com).
+where your server IP may be found via 
+
+```
+Linodes --> dashboard --> Remote Access
+```
+
+You will be prompted for the `root` password you created when deploying a new image to your [Linode](http://linode.com).
 
 
 ---
@@ -109,7 +115,11 @@ To setup basic security and protect the server from unauthorized access, do as f
 
 #### Two-Factor Authentication
 
-You are encouraged to setup two-factor authentication when logging in to the Linode manager. From the Linode manager, navigate to `My Profile --> Password & Authentication --> Two-Factor Authentication`.
+You are encouraged to setup two-factor authentication when logging in to the Linode manager. From the Linode manager, navigate to
+
+```
+My Profile --> Password & Authentication --> Two-Factor Authentication
+```
 
 
 #### User
@@ -358,7 +368,13 @@ $ sudo chmod +x /etc/network/if-pre-up.d/firewall
 ---
 ## Reverse DNS
 
-While DNS allows a domain name to be resolved to an IP address, reverse DNS allows an IP address to be resolved to a domain name. Reverse DNS is useful when network troubleshooting (`ping`, `traceroute`). From the Linode manager, navigate to `Linodes --> Remote Access --> Reverse DNS` and enter your domain.
+While DNS allows a domain name to be resolved to an IP address, reverse DNS allows an IP address to be resolved to a domain name. Reverse DNS is useful when network troubleshooting (`ping`, `traceroute`). From the Linode manager, navigate to
+
+```
+Linodes --> Remote Access --> Reverse DNS
+```
+
+and enter your domain.
 
 
 
