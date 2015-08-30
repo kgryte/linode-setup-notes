@@ -185,7 +185,7 @@ $ chmod 600 .ssh/authorized_keys
 If you connect to your Linode from only one computer, you should disable password authentication and require that all users authenticate using key-based authentication. If you need to connect from multiple computers, you may want to keep password authentication enabled to prevent having to copy your private key to multiple computers.
 
 ``` bash
-$ sudo nano /etc/ssh/ssh_config
+$ sudo nano /etc/ssh/sshd_config
 ```
 
 Change `PasswordAuthentication` to `no`. You may need to remove the `#` symbol to uncomment the line.
@@ -194,7 +194,7 @@ Change `PasswordAuthentication` to `no`. You may need to remove the `#` symbol t
 PasswordAuthentication no
 ```
 
-Change the `PermitRootLogin` to `no`. You may need to add this line.
+Change the `PermitRootLogin` option to `no`.
 
 ```
 PermitRootLogin no
@@ -217,7 +217,7 @@ Since all Ubuntu servers have a `root` user and most servers run SSH on port `22
 $ sudo nano /etc/ssh/sshd_config
 ```
 
-Set the `Port` to a value less than `1024`; e.g., `567`. You may need to remove the `#` symbol to uncomment the line.
+Set the `Port` to a value less than `1024`; e.g., `567`.
 
 ```
 Port 567
@@ -375,6 +375,282 @@ Linodes --> Remote Access --> Reverse DNS
 ```
 
 and enter your domain.
+
+
+---
+## Software
+
+
+#### Compiler 
+
+A compiler is often required to install packages and software. To install one,
+
+``` bash
+$ sudo apt-get install build-essential
+```
+
+
+
+#### Git
+
+Install [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git):
+
+``` bash
+$ sudo apt-get install git
+```
+
+Once installed, configure for use with [Github](https://help.github.com/articles/set-up-git/).
+
+``` bash
+$ git config --global user.name "<your_github_username>"
+$ git config --global user.email "<your_github_email>"
+```
+
+To interact with Github over SSH, first check for any existing SSH keys on your server.
+
+``` bash
+$ ls -al ~/.ssh 
+```
+
+If you see an existing private-public key pair which you can use with Github, skip the next step. To generate a new SSH key,
+
+``` bash
+$ ssh-keygen -t rsa -b 4096 -C "<your_github_email>"
+```
+
+Accept the default file name. When prompted, enter a __strong__ passphrase. Once a key is generated, you will see a key fingerprint in your terminal.
+
+To configure the [ssh-agent](https://en.wikipedia.org/wiki/Ssh-agent) program to use your SSH key, start the agent in the background
+
+``` bash
+$ eval "$(ssh-agent -s)"
+```
+
+and add your SSH key
+
+``` bash
+$ ssh-add ~/.ssh/id_rsa
+```
+
+where `<id_rsa>` corresponds to the name of an existing SSH key, if not generated above. Next, copy the public key,
+
+``` bash
+$ cat ~/.ssh/id_rsa.pub
+```
+
+and add to your list of SSH keys on [Github](https://help.github.com/articles/generating-ssh-keys/#platform-linux). To verify that everything is working,
+
+``` bash
+$ ssh -T git@github.com
+```
+
+Verify the fingerprint and type `yes`. If the user name matches yours, everything works as expected.
+
+
+
+#### Python
+
+Install Python environment:
+
+``` bash
+$ sudo apt-get install python-pip python-dev
+$ sudo pip install virtualenv
+```
+
+The above create a global `pip` command to install Python packages. You are encouraged __not__ to use it, as packages will be installed globally. Instead, use `virtualenv`.
+
+To create a new virtual Python environment,
+
+``` bash
+$ virtualenv --distribute <environment_name>
+```
+
+where `<environment_name>` is the name of your choosing; e.g., `python/dev`. To switch to the new environment,
+
+``` bash
+$ cd <environment_name>
+$ source bin/activate
+```
+
+`pip` can then be used inside of `virtualenv`.
+
+``` bash
+$ pip search <package_name>
+$ pip install <package_name>
+```
+
+To exit a virtual environment,
+
+``` bash
+$ deactivate
+```
+
+
+#### Golang
+
+To install [Golang](https://github.com/golang/go/wiki/Ubuntu), first download a Golang binary
+
+``` bash
+$ sudo wget https://storage.googleapis.com/golang/go$VERSION.$OS-$ARCH.tar.gz
+```
+
+where `$VERSION` is your desired version (e.g., `1.5`), `$OS` is your operating system (e.g., `linux`), and `$ARCH` is your architecture (e.g., `amd64`). See the Golang [downloads](https://golang.org/dl/) for a list of possible downloads. Next, extract the archive into `/usr/local` 
+
+``` bash
+$ sudo tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
+```
+
+For example,
+
+``` bash
+$ sudo wget https://storage.googleapis.com/golang/go1.5.linux-amd64.tar.gz -P ./downloads
+$ sudo tar -C /usr/local -xzf ./downloads/go1.5.linux-amd64.tar.gz
+```
+
+Add `/usr/local/go/bin` to the `PATH` environment variable. Open your `~/.profile`
+
+``` bash
+$ sudo nano ~/.profile
+```
+
+and add the following line:
+
+```
+export PATH=$PATH:/usr/local/go/bin
+```
+
+To apply the changes to the current shell,
+
+``` bash
+$ source ~/.profile
+```
+
+To verify that Golang is working,
+
+``` bash
+$ golang version
+```
+
+Next, create a Golang workspace
+
+``` bash
+$ mkdir -p code/go
+```
+
+and update your `~/.profile`
+
+``` bash
+$ sudo nano ~./profile
+```
+
+to include
+
+``` 
+export GOPATH=$HOME/code/go
+export PATH=$PATH:$GOPATH/bin
+```
+
+Reload your `.profile`:
+
+``` bash
+$ source ~/.profile
+```
+
+Verify that everything is working:
+
+``` bash
+$ echo $PATH
+$ echo $GOPATH
+```
+
+Next, let's create a test package.
+
+``` bash
+$ mkdir -p $GOPATH/src/github.com/<your_github_username>/hello
+$ cd $GOPATH/src/github.com/<your_github_username>/hello
+$ touch hello.go
+```
+
+Open the file `./hello.go`
+
+``` bash
+$ nano ./hello.go
+```
+
+and paste
+
+``` 
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Printf("Hello, world.\n")
+}
+```
+
+Save the file and install the program:
+
+``` bash
+$ go install
+```
+
+To run the program,
+
+``` bash
+$ hello
+# => Hello, world.
+```
+
+
+#### Node.js
+
+Install the [Node version manager](https://github.com/creationix/nvm) (NVM):
+
+``` bash
+$ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.26.1/install.sh | bash
+```
+
+Reload your shell
+
+``` bash
+$ source ~/.profile
+```
+
+and verify that `nvm` is working
+
+``` bash
+$ nvm
+```
+
+To install the latest version of Node,
+
+``` bash
+$ nvm install v0.12
+```
+
+Check the installed Node version:
+
+``` bash
+$ node --version
+```
+
+
+#### Nginx
+
+Install [Nginx](https://www.nginx.com/), a high performance [web server](https://en.wikipedia.org/wiki/Nginx) with a strong focus on concurrency:
+
+``` bash
+$ sudo apt-get install nginx
+```
+
+To start [Nginx](https://www.nginx.com/),
+
+``` bash
+$ sudo service nginx start
+```
+
+
 
 
 
