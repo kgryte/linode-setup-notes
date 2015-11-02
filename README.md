@@ -9,6 +9,7 @@ The following are notes on how to setup [Linode](http://linode.com). The initial
 1. [Basic Ubuntu Setup](#basic-ubuntu-setup)
 1. [Basic Security Setup](#basic-ubuntu-setup)
 1. [Reverse DNS](#reverse-dns)
+1. [Software](#software)
 1. [References](#references)
 
 ---
@@ -457,7 +458,7 @@ $ sudo apt-get install python-pip python-dev
 $ sudo pip install virtualenv
 ```
 
-The above create a global `pip` command to install Python packages. You are encouraged __not__ to use it, as packages will be installed globally. Instead, use `virtualenv`.
+The above creates a global `pip` command to install Python packages. You are encouraged __not__ to use it, as packages will be installed globally. Instead, use `virtualenv`.
 
 To create a new virtual Python environment,
 
@@ -664,7 +665,3 @@ $ sudo service nginx start
 *	[Hosting a website](https://www.linode.com/docs/websites/hosting-a-website/)
 *	[How to setup your linode](http://feross.org/how-to-setup-your-linode/)
 
-
-## Author
-
-Athan Reines ([@kgryte](https://twitter.com/kgryte)).

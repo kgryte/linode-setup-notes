@@ -7,6 +7,7 @@
 ###############
 reports/
 build/
+tmp/
 
 # Compiled source #
 ###################
