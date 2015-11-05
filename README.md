@@ -651,6 +651,64 @@ To start [Nginx](https://www.nginx.com/),
 $ sudo service nginx start
 ```
 
+To configure [Nginx](https://www.nginx.com/), first create a backup copy of the default configuration file:
+
+``` bash
+$ cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup
+```
+
+Next, copy the template virtual domain configuration file:
+
+``` bash
+$ cp /etc/nginx/sites-available/default /etc/nginx/sites-available/<your_domain>
+```
+
+where `<your_domain>` is the name of your domain; e.g., `example.com`. If you are hosting multiple domains, you should create a virtual domain configuration file for each domain. Once copied, we need to tailor the configuration file(s).
+
+``` bash
+$ sudo nano /etc/nginx/sites-available/<your_domain>
+```
+
+In the `server` block, change the `server_name` directive to your domain.
+
+```
+server_name <my_domain>
+server_name *.<my_domain> # process requests for all subdomains
+```
+
+Beneath the `server_name` directive, specify an `access_log` location.
+
+```
+# Absolute path to a directory dedicated to your domain; e.g., /var/www/<your_domain>/logs/access.log
+access_log /srv/www/<your_domain>/logs/access.log
+```
+
+Next, create `location` directives to match requests with static assets. For example,
+
+```
+ # Define routes for static assets:
+location / {  
+	# Absolute path to root directory containing static assets:
+    root  /srv/www/<your_domain>/public
+
+    # Files to serve if none specified:
+    index index.html index.htm;
+}
+```
+
+In order for [Nginx](https://www.nginx.com/) to __activate__ the virtual host configuration, create a symbolic link between the `sites-available` and `sites-enabled` directories.
+
+``` bash
+$ sudo ln -s /etc/nginx/sites-available/<your_domain> /etc/nginx/sites-enabled/<your_domain>
+```
+
+Remove the symbolic link for the `default` configuration file to prevent conflicts.
+
+``` bash
+$ sudo rm /etc/nginx/sites-enabled/default
+```
+
+For more information, see the Linode [guides](https://www.linode.com/docs/websites/nginx/how-to-configure-nginx).
 
 
 
