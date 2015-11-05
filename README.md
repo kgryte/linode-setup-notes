@@ -10,6 +10,7 @@ The following are notes on how to setup [Linode](http://linode.com). The initial
 1. [Basic Security Setup](#basic-ubuntu-setup)
 1. [Reverse DNS](#reverse-dns)
 1. [Software](#software)
+1. [Sites](#sites)
 1. [References](#references)
 
 ---
@@ -651,13 +652,13 @@ To start [Nginx](https://www.nginx.com/),
 $ sudo service nginx start
 ```
 
-To configure [Nginx](https://www.nginx.com/), first create a backup copy of the default configuration file:
+To configure [Nginx](https://www.nginx.com/), first create a backup copy of the default configuration file
 
 ``` bash
 $ cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup
 ```
 
-Next, copy the template virtual domain configuration file:
+Next, copy the template virtual domain configuration file
 
 ``` bash
 $ cp /etc/nginx/sites-available/default /etc/nginx/sites-available/<your_domain>
@@ -708,10 +709,10 @@ Remove the symbolic link for the `default` configuration file to prevent conflic
 $ sudo rm /etc/nginx/sites-enabled/default
 ```
 
-Finally, reload [Nginx](https://www.nginx.com/):
+Finally, reload [Nginx](https://www.nginx.com/)
 
 ``` bash
-$ service nginx reload
+$ sudo service nginx reload
 ```
 
 For more information, see the Linode [guides](https://www.linode.com/docs/websites/nginx/how-to-configure-nginx).
@@ -720,7 +721,7 @@ For more information, see the Linode [guides](https://www.linode.com/docs/websit
 ---
 ## Sites
 
-The following outlines steps for hosting a web assets based on the [Nginx](https://www.nginx.com/) configuration above. First, create a directory to store files for all hosted domains.
+The following outlines steps for hosting web assets based on the [Nginx](https://www.nginx.com/) configuration above. First, create a directory to store files for all hosted domains.
 
 ``` bash
 $ sudo mkdir /srv/www
