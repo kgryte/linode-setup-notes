@@ -720,22 +720,28 @@ For more information, see the Linode [guides](https://www.linode.com/docs/websit
 ---
 ## Sites
 
-The following outlines steps for hosting a web assets based on the [Nginx](https://www.nginx.com/) configuration above. First, create a directory to store assets for each hosted domain.
+The following outlines steps for hosting a web assets based on the [Nginx](https://www.nginx.com/) configuration above. First, create a directory to store files for all hosted domains.
 
 ``` bash
 $ sudo mkdir /srv/www
 ```
 
-Set permissions so that all files may be read.
+Set permissions so that all `www` files may be read.
 
 ``` bash
 $ sudo chmod 755 /srv/www
 ```
 
-For each domain, create a directory to store web assets.
+For each domain, create a directory to store site files.
 
 ``` bash
 $ sudo mkdir /srv/www/<your_domain>
+```
+
+Create a directory to store access logs.
+
+``` bash
+$ sudo mkdir /srv/www/<your_domain>/logs
 ```
 
 Next, grant ownership of each directory to the `user` specified in `nginx.conf`. By default, this `user` is `www-data`.
@@ -744,8 +750,37 @@ Next, grant ownership of each directory to the `user` specified in `nginx.conf`.
 $ sudo chown -R www-data:www-data /srv/www/<your_domain>/public
 ```
 
-Finally, 
+To test that everything is configured correctly, create an `index.html` file
 
+``` bash
+$ sudo touch /src/www/<your_domain>/public/index.html
+$ sudo nano /src/www/<your_domain>/public/index.html
+```
+
+and paste the following content
+
+``` html
+<html>
+  <head>
+    <title>My Domain</title>
+  </head>
+  <body>
+    <h1>Beep. Boop.</h1>
+  </body>
+</html>
+```
+
+Determine your `ip address`.
+
+``` bash
+$ ifconfig
+```
+
+Once determined, enter the `ip address` into your browser and you should see the following:
+
+```
+Beep. Boop.
+```
 
 
 
