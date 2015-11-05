@@ -672,15 +672,15 @@ $ sudo nano /etc/nginx/sites-available/<your_domain>
 In the `server` block, change the `server_name` directive to your domain.
 
 ```
-server_name <my_domain>
-server_name *.<my_domain> # process requests for all subdomains
+server_name <my_domain>;
+server_name *.<my_domain>; # process requests for all subdomains
 ```
 
 Beneath the `server_name` directive, specify an `access_log` location.
 
 ```
 # Absolute path to a directory dedicated to your domain; e.g., /var/www/<your_domain>/logs/access.log
-access_log /srv/www/<your_domain>/logs/access.log
+access_log /srv/www/<your_domain>/logs/access.log;
 ```
 
 Next, create `location` directives to match requests with static assets. For example,
@@ -689,7 +689,7 @@ Next, create `location` directives to match requests with static assets. For exa
  # Define routes for static assets:
 location / {  
 	# Absolute path to root directory containing static assets:
-    root  /srv/www/<your_domain>/public
+    root  /srv/www/<your_domain>/public;
 
     # Files to serve if none specified:
     index index.html index.htm;
@@ -708,9 +708,43 @@ Remove the symbolic link for the `default` configuration file to prevent conflic
 $ sudo rm /etc/nginx/sites-enabled/default
 ```
 
+Finally, reload [Nginx](https://www.nginx.com/):
+
+``` bash
+$ service nginx reload
+```
+
 For more information, see the Linode [guides](https://www.linode.com/docs/websites/nginx/how-to-configure-nginx).
 
 
+---
+## Sites
+
+The following outlines steps for hosting a web assets based on the [Nginx](https://www.nginx.com/) configuration above. First, create a directory to store assets for each hosted domain.
+
+``` bash
+$ sudo mkdir /srv/www
+```
+
+Set permissions so that all files may be read.
+
+``` bash
+$ sudo chmod 755 /srv/www
+```
+
+For each domain, create a directory to store web assets.
+
+``` bash
+$ sudo mkdir /srv/www/<your_domain>
+```
+
+Next, grant ownership of each directory to the `user` specified in `nginx.conf`. By default, this `user` is `www-data`.
+
+``` bash
+$ sudo chown -R www-data:www-data /srv/www/<your_domain>/public
+```
+
+Finally, 
 
 
 
