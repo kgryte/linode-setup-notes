@@ -783,6 +783,37 @@ Once determined, enter the `ip address` into your browser and you should see the
 Beep. Boop.
 ```
 
+If a site is a Git repository, clone the repo into a `www` domain directory
+
+``` bash
+$ cd /srv/www/<your_domain>
+
+# Assuming an empty directory...
+$ sudo git clone https://github.com/<owner>/<repo>
+```
+
+If the repository requires build steps, change the directory ownership and permissions. For example,
+
+``` bash
+$ sudo chown -R <user> ./<repo>/
+
+# Allow a non-root user to read, write, and execute:
+$ sudo chmod -R 775 ./<repo>
+```
+
+Supposing the `<repo>` is a Node.js application, the following should now be possible:
+
+``` bash
+$ cd <repo>
+
+# Use a particular Node version:
+$ nvm use 5
+
+# Install Node dependencies:
+$ npm install
+```
+
+
 
 
 ---
