@@ -813,7 +813,7 @@ Supposing the `<repo>` is a Node.js application, the following should now be pos
 $ cd <repo>
 
 # Use a particular Node version:
-$ nvm use 5
+$ nvm use 8
 
 # Install Node dependencies:
 $ npm install
