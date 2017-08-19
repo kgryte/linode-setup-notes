@@ -1,8 +1,8 @@
 # Linode Setup
 
-> How to setup [Linode](http://linode.com).
+> How to setup [Linode][linode].
 
-The following are notes on how to setup [Linode](http://linode.com). The initial setup steps have been mainly compiled from the [Linode](http://linode.com) getting started guides, which collectively provide a good starting point for basic configuration. 
+The following are notes on how to setup [Linode][linode]. The initial setup steps have been mainly compiled from the [Linode][linode] getting started guides, which collectively provide a good starting point for basic configuration. 
 
 1. [Provision](#provision)
 1. [Remote Access](#remote-access)
@@ -17,14 +17,14 @@ The following are notes on how to setup [Linode](http://linode.com). The initial
 
 ## Provision
 
-To provision a new [Linode](http://linode.com) server, see the getting started [guide](https://www.linode.com/docs/getting-started). After a few minutes, a [Linode](http://linode.com) server will be provisioned. This guide assumes you have chosen `Ubuntu 14.04 LTS` as your base image.
+To provision a new [Linode][linode] server, see the getting started [guide][linode-getting-started]. After a few minutes, a [Linode][linode] server will be provisioned. This guide assumes you have chosen `Ubuntu 14.04 LTS` as your base image.
 
 
 ---
 
 ## Remote Access
 
-To connect to a [Linode](http://linode.com) server,
+To connect to a [Linode][linode] server,
 
 ``` bash
 $ ssh root@<your_server_ip>
@@ -36,7 +36,7 @@ where your server IP may be found via
 Linodes --> dashboard --> Remote Access
 ```
 
-You will be prompted for the `root` password you created when deploying a new image to your [Linode](http://linode.com).
+You will be prompted for the `root` password you created when deploying a new image to your [Linode][linode].
 
 
 ---
@@ -86,7 +86,7 @@ The assigned FQDN should have a corresponding "A" record in DNS pointing to your
 $ ssh myserver.<your_domain>
 ```
 
-For more information, see the "Adding DNS Records" section in the Linode [guide](https://www.linode.com/docs/websites/hosting-a-website/).
+For more information, see the "Adding DNS Records" section in the Linode [guide][linode-hosting-website].
 
 
 #### Timezone
@@ -158,7 +158,7 @@ __WARNING__: do __not__ complete the following steps from a publicly shared comp
 
 ##### Generate SSH keys
 
-If you have already generated SSH keys before (e.g., when configuring Github to use SSH), you can skip the following step. To generate SSH keys,
+If you have already generated SSH keys before (e.g., when configuring GitHub to use SSH), you can skip the following step. To generate SSH keys,
 
 ``` bash
 $ ssh-keygen -t rsa -C "<your_email_address>"
@@ -243,7 +243,7 @@ $ ssh <your_username>@myserver.<your_domain> -p 567
 
 #### Fail2Ban
 
-[Fail2Ban](Fail2Ban) is an application that prevents dictionary attacks on your server. [Fail2Ban](Fail2Ban) can monitor login attempts across different protocols (SSH, HTTP, SMTP) and will create temporary firewall rules to block traffic from an attacker's IP address. To install,
+[Fail2Ban][fail2ban] is an application that prevents dictionary attacks on your server. [Fail2Ban][fail2ban] can monitor login attempts across different protocols (SSH, HTTP, SMTP) and will create temporary firewall rules to block traffic from an attacker's IP address. To install,
 
 ``` bash
 $ sudo apt-get install fail2ban
@@ -400,26 +400,26 @@ $ sudo apt-get install build-essential
 
 #### Git
 
-Install [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git):
+Install [git][git]:
 
 ``` bash
 $ sudo apt-get install git
 ```
 
-Once installed, configure for use with [Github](https://help.github.com/articles/set-up-git/).
+Once installed, configure for use with [GitHub][github-git].
 
 ``` bash
 $ git config --global user.name "<your_github_username>"
 $ git config --global user.email "<your_github_email>"
 ```
 
-To interact with Github over SSH, first check for any existing SSH keys on your server.
+To interact with GitHub over SSH, first check for any existing SSH keys on your server.
 
 ``` bash
 $ ls -al ~/.ssh 
 ```
 
-If you see an existing private-public key pair which you can use with Github, skip the next step. To generate a new SSH key,
+If you see an existing private-public key pair which you can use with GitHub, skip the next step. To generate a new SSH key,
 
 ``` bash
 $ ssh-keygen -t rsa -b 4096 -C "<your_github_email>"
@@ -427,7 +427,7 @@ $ ssh-keygen -t rsa -b 4096 -C "<your_github_email>"
 
 Accept the default file name. When prompted, enter a __strong__ passphrase. Once a key is generated, you will see a key fingerprint in your terminal.
 
-To configure the [ssh-agent](https://en.wikipedia.org/wiki/Ssh-agent) program to use your SSH key, start the agent in the background
+To configure the [ssh-agent][ssh-agent] program to use your SSH key, start the agent in the background
 
 ``` bash
 $ eval "$(ssh-agent -s)"
@@ -445,7 +445,7 @@ where `<id_rsa>` corresponds to the name of an existing SSH key, if not generate
 $ cat ~/.ssh/id_rsa.pub
 ```
 
-and add to your list of SSH keys on [Github](https://help.github.com/articles/generating-ssh-keys/#platform-linux). To verify that everything is working,
+and add to your list of SSH keys on [GitHub][github-ssh-keys]. To verify that everything is working,
 
 ``` bash
 $ ssh -T git@github.com
@@ -495,13 +495,13 @@ $ deactivate
 
 #### Golang
 
-To install [Golang](https://github.com/golang/go/wiki/Ubuntu), first download a Golang binary
+To install [Golang][golang-ubuntu], first download a Golang binary
 
 ``` bash
 $ sudo wget https://storage.googleapis.com/golang/go$VERSION.$OS-$ARCH.tar.gz
 ```
 
-where `$VERSION` is your desired version (e.g., `1.5`), `$OS` is your operating system (e.g., `linux`), and `$ARCH` is your architecture (e.g., `amd64`). See the Golang [downloads](https://golang.org/dl/) for a list of possible downloads. Next, extract the archive into `/usr/local` 
+where `$VERSION` is your desired version (e.g., `1.5`), `$OS` is your operating system (e.g., `linux`), and `$ARCH` is your architecture (e.g., `amd64`). See the Golang [downloads][golang-downloads] for a list of possible downloads. Next, extract the archive into `/usr/local` 
 
 ``` bash
 $ sudo tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
@@ -612,7 +612,7 @@ $ hello
 
 #### Node.js
 
-Install the [Node version manager](https://github.com/creationix/nvm) (NVM):
+Install the [Node version manager][nvm] (NVM):
 
 ``` bash
 $ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
@@ -645,19 +645,19 @@ $ node --version
 
 #### Nginx
 
-Install [Nginx](https://www.nginx.com/), a high performance [web server](https://en.wikipedia.org/wiki/Nginx) with a strong focus on concurrency:
+Install [Nginx][nginx], a high performance [web server][nginx-wikipedia] with a strong focus on concurrency:
 
 ``` bash
 $ sudo apt-get install nginx
 ```
 
-To start [Nginx](https://www.nginx.com/),
+To start [Nginx][nginx],
 
 ``` bash
 $ sudo service nginx start
 ```
 
-To configure [Nginx](https://www.nginx.com/), first create a backup copy of the default configuration file
+To configure [Nginx][nginx], first create a backup copy of the default configuration file
 
 ``` bash
 $ cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup
@@ -702,7 +702,7 @@ location / {
 }
 ```
 
-In order for [Nginx](https://www.nginx.com/) to __activate__ the virtual host configuration, create a symbolic link between the `sites-available` and `sites-enabled` directories.
+In order for [Nginx][nginx] to __activate__ the virtual host configuration, create a symbolic link between the `sites-available` and `sites-enabled` directories.
 
 ``` bash
 $ sudo ln -s /etc/nginx/sites-available/<your_domain> /etc/nginx/sites-enabled/<your_domain>
@@ -714,20 +714,20 @@ Remove the symbolic link for the `default` configuration file to prevent conflic
 $ sudo rm /etc/nginx/sites-enabled/default
 ```
 
-Finally, reload [Nginx](https://www.nginx.com/)
+Finally, reload [Nginx][nginx]
 
 ``` bash
 $ sudo service nginx reload
 ```
 
-For more information, see the Linode [guides](https://www.linode.com/docs/websites/nginx/how-to-configure-nginx).
+For more information, see the Linode [guides][linode-nginx].
 
 
 ---
 
 ## Sites
 
-The following outlines steps for hosting web assets based on the [Nginx](https://www.nginx.com/) configuration above. First, create a directory to store files for all hosted domains.
+The following outlines steps for hosting web assets based on the [Nginx][nginx] configuration above. First, create a directory to store files for all hosted domains.
 
 ``` bash
 $ sudo mkdir /srv/www
@@ -824,8 +824,36 @@ $ npm install
 
 ## References
 
-*	[Getting started](https://www.linode.com/docs/getting-started)
-*	[Securing your server](https://www.linode.com/docs/security/securing-your-server/)
-*	[Hosting a website](https://www.linode.com/docs/websites/hosting-a-website/)
-*	[How to setup your linode](http://feross.org/how-to-setup-your-linode/)
+*	[Getting started][linode-getting-started]
+*	[Securing your server][linode-security-server]
+*	[Hosting a website][linode-hosting-website]
+*	[How to setup your linode][how-to-setup-your-linode]
 
+
+<!-- links -->
+
+[linode]: http://linode.com
+[linode-getting-started]: https://www.linode.com/docs/getting-started
+[linode-hosting-website]: https://www.linode.com/docs/websites/hosting-a-website/
+[linode-nginx]: https://www.linode.com/docs/websites/nginx/how-to-configure-nginx
+[linode-securing-server]: https://www.linode.com/docs/security/securing-your-server/
+
+[fail2ban]: https://www.fail2ban.org/wiki/index.php/Main_Page
+
+[git]: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+[github-git]: https://help.github.com/articles/set-up-git/
+[github-ssh-keys]: https://help.github.com/articles/generating-ssh-keys/#platform-linux
+
+[ssh-agent]: https://en.wikipedia.org/wiki/Ssh-agent
+
+[nvm]: https://github.com/creationix/nvm
+
+[nginx]: https://www.nginx.com/
+[nginx-wikipedia]: https://en.wikipedia.org/wiki/Nginx
+
+[golang-ubuntu]: https://github.com/golang/go/wiki/Ubuntu
+[golang-downloads]: https://golang.org/dl/
+
+[how-to-setup-your-linode]: http://feross.org/how-to-setup-your-linode/
+
+<!-- /.links -->
