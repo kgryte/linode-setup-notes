@@ -825,7 +825,7 @@ $ npm install
 ## References
 
 *	[Getting started][linode-getting-started]
-*	[Securing your server][linode-security-server]
+*	[Securing your server][linode-securing-server]
 *	[Hosting a website][linode-hosting-website]
 *	[How to setup your linode][how-to-setup-your-linode]
 
