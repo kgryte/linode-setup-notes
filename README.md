@@ -1,5 +1,5 @@
-Linode Setup
-===
+# Linode Setup
+
 > How to setup [Linode](http://linode.com).
 
 The following are notes on how to setup [Linode](http://linode.com). The initial setup steps have been mainly compiled from the [Linode](http://linode.com) getting started guides, which collectively provide a good starting point for basic configuration. 
@@ -14,12 +14,14 @@ The following are notes on how to setup [Linode](http://linode.com). The initial
 1. [References](#references)
 
 ---
+
 ## Provision
 
 To provision a new [Linode](http://linode.com) server, see the getting started [guide](https://www.linode.com/docs/getting-started). After a few minutes, a [Linode](http://linode.com) server will be provisioned. This guide assumes you have chosen `Ubuntu 14.04 LTS` as your base image.
 
 
 ---
+
 ## Remote Access
 
 To connect to a [Linode](http://linode.com) server,
@@ -38,6 +40,7 @@ You will be prompted for the `root` password you created when deploying a new im
 
 
 ---
+
 ## Basic Ubuntu Setup
 
 To set up your new server, do as follows...
@@ -368,6 +371,7 @@ $ sudo chmod +x /etc/network/if-pre-up.d/firewall
 ```
 
 ---
+
 ## Reverse DNS
 
 While DNS allows a domain name to be resolved to an IP address, reverse DNS allows an IP address to be resolved to a domain name. Reverse DNS is useful when network troubleshooting (`ping`, `traceroute`). From the Linode manager, navigate to
@@ -380,6 +384,7 @@ and enter your domain.
 
 
 ---
+
 ## Software
 
 
@@ -610,7 +615,7 @@ $ hello
 Install the [Node version manager](https://github.com/creationix/nvm) (NVM):
 
 ``` bash
-$ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.26.1/install.sh | bash
+$ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 ```
 
 Reload your shell
@@ -628,7 +633,7 @@ $ nvm
 To install the latest version of Node,
 
 ``` bash
-$ nvm install v0.12
+$ nvm install v8
 ```
 
 Check the installed Node version:
@@ -719,6 +724,7 @@ For more information, see the Linode [guides](https://www.linode.com/docs/websit
 
 
 ---
+
 ## Sites
 
 The following outlines steps for hosting web assets based on the [Nginx](https://www.nginx.com/) configuration above. First, create a directory to store files for all hosted domains.
@@ -817,6 +823,7 @@ $ npm install
 
 
 ---
+
 ## References
 
 *	[Getting started](https://www.linode.com/docs/getting-started)
