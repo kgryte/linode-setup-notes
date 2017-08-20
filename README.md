@@ -694,7 +694,7 @@ Next, create `location` directives to match requests with static assets. For exa
 ```
  # Define routes for static assets:
 location / {  
-	# Absolute path to root directory containing static assets:
+    # Absolute path to root directory containing static assets:
     root  /srv/www/<your_domain>/public;
 
     # Files to serve if none specified:
